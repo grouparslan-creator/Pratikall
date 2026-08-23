@@ -1,0 +1,2 @@
+CREATE INDEX `support_reports_user_date_idx` ON `support_reports` (`user_key`,`created_at`);--> statement-breakpoint
+CREATE INDEX `support_reports_status_idx` ON `support_reports` (`central_status`,`email_status`);

@@ -1,0 +1,29 @@
+import Link from "next/link";
+
+export const dynamic = "force-dynamic";
+
+type PageProps = { searchParams?: Promise<Record<string, string | string[] | undefined>> };
+
+export default async function LoginPage({ searchParams }: PageProps) {
+  const params = (await searchParams) ?? {};
+  const returnTo = typeof params.return_to === "string" ? params.return_to : "/app";
+  const error = typeof params.error === "string" ? params.error : "";
+  const created = params.created === "1";
+  return <main className="login-page"><section className="login-card">
+    <Link href="/start" className="login-brand"><img src="/pratikall-logo.png" alt="PratikAll"/><span>Pratik<span>All</span></span></Link>
+    <p className="eyebrow">GÜVENLİ GİRİŞ</p><h1>Hesabınıza giriş yapın</h1><p className="login-lead">E-posta adresiniz ve şifrenizle PratikAll hesabınıza erişin.</p>
+    {error && <p className="login-security">Giriş bilgileri doğrulanamadı. Bilgilerinizi kontrol edip yeniden deneyin.</p>}
+    {created && <p className="login-security">Hesabınız oluşturuldu. E-posta doğrulaması açıksa gelen mesajdaki bağlantıyı tamamlayıp giriş yapın.</p>}
+    <div className="login-options">
+      <div className="email-login ready"><div className="email-login-title"><b>@</b><span><strong>E-posta ile giriş</strong><small>Supabase Auth ile güvenli oturum</small></span></div>
+        <form action="/api/auth/login" method="post"><input type="hidden" name="return_to" value={returnTo}/><label htmlFor="login-email">E-posta adresi</label><div className="auth-fields"><input id="login-email" name="email" type="email" autoComplete="email" placeholder="adiniz@ornek.com" required/><input name="password" type="password" autoComplete="current-password" placeholder="Şifreniz" minLength={8} required/></div><input type="submit" value="Giriş yap" className="auth-submit-input" style={{display:"block",width:"100%",minHeight:"44px",marginTop:"8px",border:"0",borderRadius:"10px",background:"var(--pa)",color:"#fff",fontWeight:800,cursor:"pointer"}} /></form>
+      </div>
+      <div className="login-divider"><span>veya</span></div>
+      <div className="email-login ready"><div className="email-login-title"><b>+</b><span><strong>Yeni hesap oluştur</strong><small>En az 8 karakterlik şifre kullanın</small></span></div>
+        <form action="/api/auth/signup" method="post"><label htmlFor="signup-email">E-posta adresi</label><div className="auth-fields"><input id="signup-email" name="email" type="email" autoComplete="email" placeholder="adiniz@ornek.com" required/><input name="password" type="password" autoComplete="new-password" placeholder="Yeni şifre" minLength={8} required/></div><input type="submit" value="Hesap oluştur" className="auth-submit-input" style={{display:"block",width:"100%",minHeight:"44px",marginTop:"8px",border:"0",borderRadius:"10px",background:"var(--pa)",color:"#fff",fontWeight:800,cursor:"pointer"}} /></form>
+      </div>
+    </div>
+    <p className="login-security">Giriş bilgileriniz Supabase Auth tarafından doğrulanır. Şifreniz PratikAll veritabanında saklanmaz.</p>
+    <div className="login-links"><Link href="/privacy">Gizlilik</Link><Link href="/terms">Kullanım koşulları</Link></div>
+  </section></main>;
+}
