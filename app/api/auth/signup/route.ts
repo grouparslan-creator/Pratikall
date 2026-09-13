@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAuthConfig, setSupabaseSession } from "@/app/lib/supabase-session";
 
-type SignupError = { code?: string; error_code?: string; msg?: string; message?: string };
+type SignupError = { code?: string | number; error_code?: string | number; msg?: unknown; message?: unknown };
 
 function signupErrorCode(error: SignupError) {
-  const code = (error.code ?? error.error_code ?? "").toLowerCase();
-  const message = (error.msg ?? error.message ?? "").toLowerCase();
+  const code = String(error.code ?? error.error_code ?? "").toLowerCase();
+  const message = String(error.msg ?? error.message ?? "").toLowerCase();
   if (code.includes("over_email_send_rate_limit") || message.includes("rate limit")) return "rate_limit";
   if (code.includes("signup_disabled") || message.includes("signups not allowed")) return "disabled";
   if (code.includes("user_already_exists") || message.includes("already registered")) return "exists";
