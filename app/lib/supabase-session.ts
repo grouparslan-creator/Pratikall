@@ -4,10 +4,14 @@ const ACCESS_COOKIE = "pratikall_sb_access";
 const REFRESH_COOKIE = "pratikall_sb_refresh";
 
 function supabaseUrl() {
-  return process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "") ?? "";
+  return process.env.NEXT_PUBLIC_SUPABASE_URL?.trim().replace(/\/$/, "") ?? "";
 }
 function publishableKey() {
-  return process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? "";
+  return (
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim() ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() ||
+    ""
+  );
 }
 
 export function supabaseAuthReady() {

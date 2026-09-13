@@ -6,6 +6,7 @@ Required Vercel environment variables:
 - `DATABASE_URL` (Supabase Transaction Pooler connection string; keep secret)
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+  - Legacy Supabase projects can use `NEXT_PUBLIC_SUPABASE_ANON_KEY` instead.
 - `ADMIN_EMAILS` (recommended for admin routes)
 
 Key migration changes:

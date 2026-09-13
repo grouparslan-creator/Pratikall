@@ -9,10 +9,22 @@ export default async function LoginPage({ searchParams }: PageProps) {
   const returnTo = typeof params.return_to === "string" ? params.return_to : "/app";
   const error = typeof params.error === "string" ? params.error : "";
   const created = params.created === "1";
+  const errorMessages: Record<string, string> = {
+    config: "Kayıt servisi henüz yapılandırılmamış. Lütfen yöneticiye bildirin.",
+    email: "Geçerli bir e-posta adresi girin.",
+    password: "Şifreniz en az 8 karakter olmalı.",
+    exists: "Bu e-posta adresiyle zaten bir hesap bulunuyor. Giriş yapmayı deneyin.",
+    disabled: "Yeni hesap oluşturma şu anda kapalı.",
+    rate_limit: "Çok fazla doğrulama isteği gönderildi. Birkaç dakika sonra yeniden deneyin.",
+    unavailable: "Kayıt servisine şu anda ulaşılamıyor. Lütfen biraz sonra yeniden deneyin.",
+    signup: "Hesap oluşturulamadı. Bilgilerinizi kontrol edip yeniden deneyin.",
+    missing: "E-posta ve şifre alanlarını doldurun.",
+    invalid: "Giriş bilgileri doğrulanamadı. Bilgilerinizi kontrol edip yeniden deneyin.",
+  };
   return <main className="login-page"><section className="login-card">
     <Link href="/start" className="login-brand"><img src="/pratikall-logo.png" alt="PratikAll"/><span>Pratik<span>All</span></span></Link>
     <p className="eyebrow">GÜVENLİ GİRİŞ</p><h1>Hesabınıza giriş yapın</h1><p className="login-lead">E-posta adresiniz ve şifrenizle PratikAll hesabınıza erişin.</p>
-    {error && <p className="login-security">Giriş bilgileri doğrulanamadı. Bilgilerinizi kontrol edip yeniden deneyin.</p>}
+    {error && <p className="login-security" role="alert">{errorMessages[error] ?? errorMessages.signup}</p>}
     {created && <p className="login-security">Hesabınız oluşturuldu. E-posta doğrulaması açıksa gelen mesajdaki bağlantıyı tamamlayıp giriş yapın.</p>}
     <div className="login-options">
       <div className="email-login ready"><div className="email-login-title"><b>@</b><span><strong>E-posta ile giriş</strong><small>Supabase Auth ile güvenli oturum</small></span></div>
