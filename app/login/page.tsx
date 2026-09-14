@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SignupForm from "./signup-form";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,13 @@ export default async function LoginPage({ searchParams }: PageProps) {
     config: "Kayıt servisi henüz yapılandırılmamış. Lütfen yöneticiye bildirin.",
     email: "Geçerli bir e-posta adresi girin.",
     password: "Şifreniz en az 8 karakter olmalı.",
+    password_match: "Şifreler birbiriyle aynı olmalı.",
+    name: "Ad ve soyadınızı girin.",
+    phone: "Geçerli bir telefon numarası girin.",
+    terms: "Devam etmek için kullanım koşullarını ve gizlilik politikasını kabul edin.",
+    company: "Kurumsal hesap için şirket unvanını girin.",
+    tax_number: "Vergi numarası 10, şahıs şirketi TCKN bilgisi 11 haneli olmalı.",
+    billing: "Kurumsal fatura bilgilerini eksiksiz doldurun.",
     exists: "Bu e-posta adresiyle zaten bir hesap bulunuyor. Giriş yapmayı deneyin.",
     disabled: "Yeni hesap oluşturma şu anda kapalı.",
     rate_limit: "Çok fazla doğrulama isteği gönderildi. Birkaç dakika sonra yeniden deneyin.",
@@ -31,8 +39,8 @@ export default async function LoginPage({ searchParams }: PageProps) {
         <form action="/api/auth/login" method="post"><input type="hidden" name="return_to" value={returnTo}/><label htmlFor="login-email">E-posta adresi</label><div className="auth-fields"><input id="login-email" name="email" type="email" autoComplete="email" placeholder="adiniz@ornek.com" required/><input name="password" type="password" autoComplete="current-password" placeholder="Şifreniz" minLength={8} required/></div><input type="submit" value="Giriş yap" className="auth-submit-input" style={{display:"block",width:"100%",minHeight:"44px",marginTop:"8px",border:"0",borderRadius:"10px",background:"var(--pa)",color:"#fff",fontWeight:800,cursor:"pointer"}} /></form>
       </div>
       <div className="login-divider"><span>veya</span></div>
-      <div className="email-login ready"><div className="email-login-title"><b>+</b><span><strong>Yeni hesap oluştur</strong><small>En az 8 karakterlik şifre kullanın</small></span></div>
-        <form action="/api/auth/signup" method="post"><label htmlFor="signup-email">E-posta adresi</label><div className="auth-fields"><input id="signup-email" name="email" type="email" autoComplete="email" placeholder="adiniz@ornek.com" required/><input name="password" type="password" autoComplete="new-password" placeholder="Yeni şifre" minLength={8} required/></div><input type="submit" value="Hesap oluştur" className="auth-submit-input" style={{display:"block",width:"100%",minHeight:"44px",marginTop:"8px",border:"0",borderRadius:"10px",background:"var(--pa)",color:"#fff",fontWeight:800,cursor:"pointer"}} /></form>
+      <div className="email-login ready"><div className="email-login-title"><b>+</b><span><strong>Yeni hesap oluştur</strong><small>Bireysel veya kurumsal hesabınızı hazırlayın</small></span></div>
+        <SignupForm />
       </div>
     </div>
     <p className="login-security">Giriş bilgileriniz Supabase Auth tarafından doğrulanır. Şifreniz PratikAll veritabanında saklanmaz.</p>

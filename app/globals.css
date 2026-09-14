@@ -180,13 +180,28 @@ button:disabled { cursor: wait; opacity: .65; }
 
 .account-page, .legal-page { min-height: 100vh; display: grid; place-items: center; padding: 40px 20px; background: #f3f8f8; color: #102a43; }
 .login-page { --pa: #08a8bd; --pa-dark: #087f99; min-height: 100vh; display: grid; place-items: center; padding: 36px 18px; background: radial-gradient(circle at 15% 0%, #ffecef 0, transparent 34%), #f7f8fa; color: #171922; }
-.login-card { width: min(480px, 100%); padding: clamp(28px, 6vw, 46px); border: 1px solid #e5e6ea; border-radius: 26px; background: #fff; box-shadow: 0 24px 70px rgba(22,25,34,.1); }
+.login-card { width: min(680px, 100%); padding: clamp(28px, 6vw, 46px); border: 1px solid #e5e6ea; border-radius: 26px; background: #fff; box-shadow: 0 24px 70px rgba(22,25,34,.1); }
 .login-brand { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 34px; color: #171922; font-size: 22px; font-weight: 900; text-decoration: none; }.login-brand img { width: 36px; height: 36px; object-fit: contain; }.login-brand span span { color: var(--pa); }
 .login-card h1 { margin: 4px 0 8px; font-size: clamp(30px, 6vw, 42px); letter-spacing: -.045em; }.login-lead { margin: 0 0 28px; color: #727681; line-height: 1.6; }
 .login-options { display: grid; gap: 12px; }.login-option, .email-login { border: 1px solid #dfe1e6; border-radius: 15px; background: #fff; }.login-option { display: flex; align-items: center; gap: 14px; padding: 15px 16px; color: #20232b; text-decoration: none; }.login-option > b, .email-login-title > b { width: 34px; height: 34px; display: grid; flex: 0 0 auto; place-items: center; border-radius: 10px; background: #f2f3f6; font-size: 16px; }.login-option span, .email-login-title span { display: grid; gap: 3px; }.login-option small, .email-login-title small { color: #7e828c; }.login-option.chatgpt { border-color: #f2c2ca; background: #fff8f9; }.login-option.chatgpt > b { background: var(--pa); color: #fff; }.login-option[aria-disabled="true"] { pointer-events: none; opacity: .5; }
 .email-login { padding: 15px 16px; }.email-login-title { display: flex; align-items: center; gap: 14px; }.email-login form { display: grid; gap: 7px; margin-top: 14px; }.email-login form > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }.email-login form > div > button { grid-column: 1 / -1; width: 100%; }.email-login label { color: #6f737d; font-size: 11px; font-weight: 800; }.email-login input, .email-login button { min-height: 42px; border-radius: 10px; }.email-login input { min-width: 0; padding: 0 12px; border: 1px solid #dfe1e6; }.email-login button { padding: 0 14px; border: 0; background: var(--pa); color: #fff; font-weight: 800; }.email-login input:disabled, .email-login button:disabled { cursor: not-allowed; opacity: .5; }
 .login-divider { display: flex; align-items: center; gap: 12px; color: #9a9da5; font-size: 11px; }.login-divider::before, .login-divider::after { content: ""; height: 1px; flex: 1; background: #eceef1; }.login-security { margin: 22px 0 14px; color: #767a84; font-size: 11px; line-height: 1.6; }.login-links { display: flex; gap: 16px; }.login-links a { color: #6f737d; font-size: 11px; }
-@media (max-width: 520px) { .email-login form > div { grid-template-columns: 1fr; } }
+.signup-form { gap: 14px !important; }
+.signup-grid { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px !important; }
+.signup-grid label { display: grid; gap: 6px; }.signup-grid .field-wide { grid-column: 1 / -1; }
+.signup-grid textarea { width: 100%; min-width: 0; padding: 10px 12px; border: 1px solid #dfe1e6; border-radius: 10px; resize: vertical; }
+.account-type-picker { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 0; padding: 0; border: 0; }
+.account-type-picker legend { margin-bottom: 7px; color: #6f737d; font-size: 11px; font-weight: 800; }
+.account-type-picker label { display: flex; align-items: center; gap: 9px; padding: 11px; border: 1px solid #dfe1e6; border-radius: 10px; cursor: pointer; }
+.account-type-picker label.active { border-color: var(--pa); background: #f0fbfc; }
+.account-type-picker input { width: 16px; min-height: auto; height: 16px; padding: 0; }
+.account-type-picker span { display: grid; gap: 2px; }.account-type-picker strong { color: #252832; font-size: 12px; }.account-type-picker small { color: #7e828c; font-size: 10px; }
+.business-fields { padding: 16px; border: 1px solid #cfeaec; border-radius: 12px; background: #f7fcfc; }
+.business-fields h3 { margin: 0; font-size: 14px; }.business-fields > p { margin: 4px 0 13px; color: #747b84; font-size: 10px; }
+.terms-check { display: flex !important; align-items: flex-start; gap: 9px; line-height: 1.5; }
+.terms-check input { width: 16px; min-height: auto; height: 16px; margin-top: 1px; padding: 0; }.terms-check a { color: var(--pa-dark); }
+.auth-submit-input { display: block; width: 100%; min-height: 44px; margin-top: 2px; border: 0; border-radius: 10px; background: var(--pa); color: #fff; font-weight: 800; cursor: pointer; }
+@media (max-width: 520px) { .email-login form > div, .signup-grid, .account-type-picker { grid-template-columns: 1fr !important; } }
 .account-card, .legal-page article { width: min(820px, 100%); padding: clamp(28px, 5vw, 56px); border: 1px solid #dce9e9; border-radius: 24px; background: #fff; box-shadow: 0 20px 60px rgba(16,42,67,.08); }
 .account-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 42px; font-weight: 900; }.account-brand img { width: 42px; height: 42px; object-fit: contain; }
 .account-card h1, .legal-page h1 { margin: 0; font-size: clamp(30px, 5vw, 48px); letter-spacing: -.05em; }.account-lead { color: #607687; line-height: 1.7; }
