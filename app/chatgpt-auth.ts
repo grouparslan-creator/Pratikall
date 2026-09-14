@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { authenticatedUserFromHeaders } from "@/app/lib/platform-identity";
-import { getSupabaseSessionUser, supabaseAuthReady } from "@/app/lib/supabase-session";
+import { getSupabaseRefreshToken, getSupabaseSessionUser, supabaseAuthReady } from "@/app/lib/supabase-session";
 
 export type ChatGPTUser = {
   displayName: string;
@@ -37,6 +37,10 @@ export async function getChatGPTUser(): Promise<ChatGPTUser | null> {
 export async function requireChatGPTUser(returnTo: string): Promise<ChatGPTUser> {
   const user = await getChatGPTUser();
   if (user) return user;
+  if (supabaseAuthReady() && await getSupabaseRefreshToken()) {
+    const safeReturnTo = safeRelativeReturnPath(returnTo);
+    redirect(`/api/auth/refresh?return_to=${encodeURIComponent(safeReturnTo)}`);
+  }
   redirect(chatGPTSignInPath(returnTo));
 }
 

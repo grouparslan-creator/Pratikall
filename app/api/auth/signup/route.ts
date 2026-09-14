@@ -90,5 +90,5 @@ export async function POST(request: NextRequest) {
     await setSupabaseSession(data.access_token, data.refresh_token, data.expires_in ?? 3600);
     return NextResponse.redirect(new URL("/app", request.url), 303);
   }
-  return loginRedirect(request, { created: "1" });
+  return NextResponse.redirect(new URL("/verify-email?created=1", request.url), 303);
 }

@@ -65,6 +65,11 @@ export async function clearSupabaseSession() {
   store.delete(REFRESH_COOKIE);
 }
 
+export async function getSupabaseRefreshToken() {
+  const store = await cookies();
+  return store.get(REFRESH_COOKIE)?.value ?? null;
+}
+
 export function getSupabaseAuthConfig() {
   return { url: supabaseUrl(), key: publishableKey() };
 }
